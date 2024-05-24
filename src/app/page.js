@@ -1,4 +1,6 @@
-
+/**
+ * @author Loren Huang <LorenHu3718@gmail.com>
+ */
   import Link from "next/link";
   import Image from "next/image";
   import { 
@@ -20,6 +22,25 @@
   } from "flowbite-react";
 
   export default function Component() {
+
+    const items = [
+      {
+        Cover : "/Banner/temple.png",
+        name : "寧濟御庭園山水文化園區",
+        description : "寧濟御庭園",
+      },
+      {
+        Cover : "/Banner/bee.jpg",
+        name : "蜜蜂故事館",
+        description : "古坑蜜蜂故事館",
+      },
+      {
+        Cover : "/Banner/five.jpg",
+        name : "五年千歲公園",
+        description : "五年千歲公園 ",
+      }
+    ];
+
     return (
       <>
       <div className="bg-teal-50">
@@ -52,27 +73,29 @@
 
       <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
         <Carousel>
-          <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
-          <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-          <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-          <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
+          <img src="/Banner/bee.jpg" alt="圖片來源：sufen Chang，於 2022 年 7 月 1 日拍攝，圖片所有權為原作者所有，地點:古坑蜜蜂故事館" />
+          <img src="/Banner/five.jpg" alt="由 Pbdragonwang - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=82418849" />
+          <img src="/Banner/temple.png" alt="圖片來源 : 寧濟御庭園山水文化園區" />
+          <img src="/Banner/" alt="..." />
           <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
         </Carousel>
       </div>
-
+      <div className="bg-white py-16">
+      <div className="container mx-auto grid grid-cols-4  gap-4 ">
+      {items.map(item =>
       <Card
         className="max-w-sm"
-        imgAlt="Meaningful alt text for an image that is not purely decorative"
-        imgSrc="/vercel.svg"
+        imgAlt={item.name}
+        imgSrc={item.Cover}
       >
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Noteworthy technology acquisitions 2021
+          {item.name}
         </h5>
         <p className="font-normal text-gray-700 dark:text-gray-400">
-          Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
+          {item.description}
         </p>
         <Button>
-          Read more
+          Here to Read more
           <svg className="-mr-1 ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path
               fillRule="evenodd"
@@ -82,7 +105,9 @@
           </svg>
         </Button>
       </Card>
-
+      )}
+      </div>
+      </div>
       <Footer container>
       <div className="w-full text-center">
         <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
