@@ -30,24 +30,15 @@ export default function Component() {
   const tokenURL = 'https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token' ;
   const apiURL = 'https://tdx.transportdata.tw/api/basic/v2/Tourism/ScenicSpot/YunlinCounty'
   useEffect(() => {
-    const getToken = async () => {
-      const clientid = process.env.TDX_CLIENT_ID;
-      const clientsecret = process.env.TDX_CLIENT_SECRET;
-
-      const tokenParams = new URLSearchParams();
-      tokenParams.append('grant_type', 'client_credentials');
-      tokenParams.append('client_id', clientid);
-      tokenParams.append('client_secret', clientsecret);
-
-      const tokenRespose = await fetch(tokenURL,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: tokenParams.toString(),
-      })
+    async function fetchdata()
+    {
+      const response = await fetch('api/items');
+      const data = await response.json();
+      console.log(data);
+      setItems(data);
     }
+    fetchdata();
+    
   }
   ,[]);
   
@@ -90,6 +81,7 @@ export default function Component() {
         <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
       </Carousel>
     </div>
+
     <div className="bg-white py-16">
     <div className="container mx-auto grid grid-cols-4  gap-4 ">
     {items.map(item =>
@@ -118,6 +110,7 @@ export default function Component() {
     )}
     </div>
     </div>
+
     <Footer container>
     <div className="w-full text-center">
       <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
