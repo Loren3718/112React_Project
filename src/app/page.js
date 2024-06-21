@@ -26,21 +26,19 @@ import {
 
 export default function Component() {
 
-  const [items, setItems] = useState([])
-  const tokenURL = 'https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token' ;
-  const apiURL = 'https://tdx.transportdata.tw/api/basic/v2/Tourism/ScenicSpot/YunlinCounty'
+  const [items, setItems] = useState([]);
+  
   useEffect(() => {
     async function fetchdata()
     {
       const response = await fetch('api/items');
       const data = await response.json();
       console.log(data);
-      setItems(data);
+      setItems(Array.isArray(data) ? data : []);
     }
     fetchdata();
     
-  }
-  ,[]);
+  },[]);
   
   return (
     <>
@@ -77,8 +75,6 @@ export default function Component() {
         <img src="/Banner/bee.jpg" alt="圖片來源：sufen Chang，於 2022 年 7 月 1 日拍攝，圖片所有權為原作者所有，地點:古坑蜜蜂故事館" />
         <img src="/Banner/five.jpg" alt="由 Pbdragonwang - 自己的作品, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=82418849" />
         <img src="/Banner/temple.png" alt="圖片來源 : 寧濟御庭園山水文化園區" />
-        <img src="/Banner/" alt="..." />
-        <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
       </Carousel>
     </div>
 
@@ -133,9 +129,4 @@ export default function Component() {
   </Footer>
 </>
   );
-  <div>
-    {items.map(item => <CustomCard item={item} />
-    
-    )}
-  </div>
 }
