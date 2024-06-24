@@ -19,8 +19,6 @@ import {
   FooterLink, 
   FooterLinkGroup,
   Carousel,
-  Card,
-  Button,
   DarkThemeToggle,
 } from "flowbite-react";
 
@@ -33,8 +31,9 @@ export default function Component() {
     {
       const response = await fetch('api/items');
       const data = await response.json();
-      console.log(data);
-      setItems(Array.isArray(data) ? data : []);
+      //console.log(data);
+      console.log("Page Get Data Success");
+      setItems(data);
     }
     fetchdata();
     
@@ -80,30 +79,9 @@ export default function Component() {
 
     <div className="bg-white py-16">
     <div className="container mx-auto grid grid-cols-4  gap-4 ">
-    {items.map(item =>
-    <Card
-      className="max-w-sm"
-      imgAlt={item.name}
-      imgSrc={item.Picture.PictureUrl1}
-    >
-      <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        {item.ScenicSpotName}
-      </h5>
-      <p className="font-normal text-gray-700 dark:text-gray-400">
-        {item.Description}
-      </p>
-      <Button>
-        Here to Read more
-        <svg className="-mr-1 ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path
-            fillRule="evenodd"
-            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </Button>
-    </Card>
-    )}
+    {items.map((item, index) => (
+            <CustomCard item={item} key={index} />
+          ))}
     </div>
     </div>
 
